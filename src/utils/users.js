@@ -54,27 +54,44 @@ const getUsersInRoom =(room)=>{
     
 }
 
-addUser({
-    id: 202,
-    username: 'Pete',
-    room: ' South B ank'
-})
 
-addUser({
-    id: 200,
-    username: 'Kirby',
-    room: ' South B ank'
-})
+const getRooms =()=>{
+    const rooms= []
+    users.forEach((user)=>{
+        if(!rooms.includes(user.room)){
+            rooms.push(user.room)
+        }
 
-addUser({
-    id: 199,
-    username: 'Paula',
-    room: ' Street 1'
-})
+    })
+
+    return rooms
+}
+
+// addUser({
+//     id: 202,
+//     username: 'Pete',
+//     room: ' South B ank'
+// })
+
+// addUser({
+//     id: 200,
+//     username: 'Kirby',
+//     room: ' South B ank'
+// })
+
+// addUser({
+//     id: 199,
+//     username: 'Paula',
+//     room: ' Street 1'
+// })
+
+
+// console.log(getRooms())
 
 module.exports  = {
     addUser, 
     removeUser,
     getUser, 
-    getUsersInRoom
+    getUsersInRoom,
+    getRooms
 }

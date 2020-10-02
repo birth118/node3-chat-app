@@ -14,6 +14,7 @@ input {
     font-size: 14px;
 }
 
+
 body {
     line-height: 1.4;
     color: #333333;
@@ -36,6 +37,14 @@ input {
     padding: 12px;
     outline: none;
 }
+
+select {
+    border: 1px solid #eeeeee;
+    padding: 12px;
+    outline: none;
+    font-size: 14px;
+}
+
 
 button {
     cursor: pointer;
@@ -79,6 +88,10 @@ button:disabled {
 }
 
 .centered-form input {
+    margin-bottom: 16px;
+    width: 100%;
+}
+.centered-form select {
     margin-bottom: 16px;
     width: 100%;
 }

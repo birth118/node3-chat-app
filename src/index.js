@@ -8,7 +8,8 @@ const {generateMessage, generateLocationMessage} = require('./utils/messages')
 const {addUser, 
     removeUser,
     getUser, 
-    getUsersInRoom
+    getUsersInRoom, 
+    getRooms
 } = require('./utils/users')
 
 const app = express()
@@ -34,6 +35,15 @@ io.on('connection',(socket)=>{      // Server listening 'connection' from client
     console.log('new socket connection')    
 
     
+    socket.on('openingRooms',(callback)=>{
+        const rooms=   getRooms()
+        if(rooms.length < 1){
+            return callback('no rooms open')
+        }
+        socket.emit('rooms',rooms)
+        callback()
+    })
+
     socket.on('join', ({username, room}, callback)=>{
         const {error, user} = addUser({id: socket.id, username, room})  // Powerful object assignment in decomposition
 
@@ -48,7 +58,7 @@ io.on('connection',(socket)=>{      // Server listening 'connection' from client
         // socket.broadcast.to.emit() - send to others in a room except you
 
         // To the joiner: you
-        socket.emit('message', generateMessage('Admin','Welcome!'))       
+        socket.emit('message', generateMessage('Admin',`Welcome, ${user.username}!`))       
      
         // To emit only to the self-connection 
         socket.broadcast.to(user.room).emit('message', generateMessage('Admin',`${user.username} has joined`))         // To emit to all execept the self-socket connection
